@@ -1,0 +1,28 @@
+spring:
+  # DataSource
+  datasource:
+    url: jdbc:mysql://localhost:3306/MonFood?serverTimezone=Asia/Taipei
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # SessionFactory
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+  messages:
+    basename: i18n.Message
+    encoding: UTF-8
+    fallback-to-system-locale: false
+  
+  mvc:
+    view:
+      prefix: /WEB-INF/views
+      suffix: .jsp
+      
+# custom property
+passwordLength: 20
