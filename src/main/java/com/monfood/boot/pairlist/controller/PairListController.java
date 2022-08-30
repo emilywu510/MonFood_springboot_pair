@@ -17,7 +17,7 @@ public class PairListController {
 	@Autowired
 	private PairListService pairListService;
 	
-	// http://localhost:8080/monfood_springboot/FriendInfo>>ok 還沒測前端[to be continue]
+	// http://localhost:8080/FriendInfo>>ok 還沒測前端[to be continue]
 	@GetMapping("/FriendInfo")
 	public List<UserVO> FriendInfo(HttpSession session) {
 //		Integer useraId = (Integer) session.getAttribute("userID");
@@ -26,7 +26,7 @@ public class PairListController {
 		return friendInfo;
 	}
 	
-	// http://localhost:8080/monfood_springboot/PairInfo>> ok 還沒測前端[to be continue]
+	// http://localhost:8080/PairInfo>> ok 還沒測前端[to be continue]
 	@GetMapping("/PairInfo")
 	public List<UserVO> PairInfo(HttpSession session) {
 //		Integer useraId = (Integer) session.getAttribute("userID");

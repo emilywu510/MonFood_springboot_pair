@@ -1,0 +1,228 @@
+$(document).ready(function() {
+	let resProtocol = window.location.protocol;
+    let resHost = window.location.host;
+    let resPath = window.location.pathname;
+    let resWebCtx = resPath.substring(0, resPath.indexOf("/", 1));
+	
+    let orderList;
+    let delOrder;
+    let intervalId;
+    let orderMap;
+
+    function init() {
+        $.ajax({
+            url: 'FindByOrderServlet',
+            method: 'post',
+            data: {
+                orderStatus: 2
+            },
+            dataType: 'JSON',
+            success: function(data) {
+                // 先清空資料
+                $('#accordionBlock').html('');
+                orderList = data.orderList;
+                if(!orderList) {
+                    return;
+                }
+
+                for(let i = 0; i < orderList.length; i++) {
+                    orderMap = orderList[i];
+
+                    const accordionList = `
+                        <div class="accordion" id="accordionExample-${i}"></div><br>
+                    `;
+
+                    const accordionItemHeaderHtml = `
+                        <h2 class="accordion-header" id="headingOne-${i}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-${i}"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            請點擊查看訂單內容
+                        </button>
+                        </h2>
+                    `;
+
+                    const accordionItemBodyHtml = `
+                    <div id="collapseOne-${i}" class="accordion-collapse collapse" aria-labelledby="headingOne-${i}"
+                    data-bs-parent="#accordionExample-${i}">
+                        <div class="accordion-body">
+                        <div class="mf-order-order-test">
+                            <div>
+                            <div>訂購會員:<span>${orderMap.USER_ID}</span></div>
+                            <div>訂單編號:<span>${orderMap.ORDER_ID}</span></div>
+                            </div>
+                            <div>
+                            <div><span>${orderMap.RES_NAME}</span>(外送)</div>
+                            <div><span>${orderMap.BZ_LOCATION}</span></div>
+                            </div>
+                            <div>
+                            <div>訂購日期:<span>${orderMap.ORDER_CREATE}</span></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="mf-order-test1">
+                            <div class="list-group">
+                            <div id="productList${i}"></div>
+                            <div>
+                                <ul class="mf-order-notes">
+                                <li>訂單備註:</li>
+                                <div class="mf-order-notes-1">
+                                    <li><span>${orderMap.NOTE}</span></li>
+                                </div>
+                                </ul>
+                            </div>
+                            </div>
+                            <div>
+                            <div class="mf-order-test1-2">
+                                <ul class="mf-order-test1-1-1">
+                                <li>統一編號:<span>${orderMap.RES_ACCOUNT}</span></li>
+                                <li>總額:NT$ <span>${orderMap.TOTAL}</span></li>
+                                </ul>
+                            </div>
+                            <div class="mf-order-test2-1">
+                                <p>訂單狀態:</p>
+                                <div class="mf-order-model-1"><span>${orderMap.ORDER_STATUS}</span></div>
+                            </div>
+                            <div>
+                                <button class="delBtn btn btn-secondary" data-index="${i}"
+                                type="button" data-bs-toggle="modal" href="#exampleModalToggle" role="button">已取餐</button>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                
+                    `;
+                                    
+                                    //上方原本變數
+                                    // data-resid="${orderMap.RES_ID}"
+                                    // data-productname="${orderMap.PRODUCT_NAME}"
+                                    // data-productprice="${orderMap.PRODUCT_PRICE}"
+                                    // data-producttotal="${orderMap.TOTAL}"
+                                    // data-amount="${orderMap.AMOUNT}"
+
+
+                    const wrapperContent = $('<div>').addClass('accordion-item').append(accordionItemHeaderHtml).append(accordionItemBodyHtml);
+                    
+                    $('#accordionBlock').append($(accordionList).append(wrapperContent));
+
+                    // TODO: 動態塞入訂單項目 => Lambda groupby 訂單編號
+                    for(let j = 0; j < orderMap.productList.length; j++) {
+                        const product = orderMap.productList[j];
+                        const orderItemHtml = `
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item flex-balance"><span class="productName" name="productName">${product.PRODUCT_NAME}</span></li>
+                                <li class="list-group-item flex-balance">數量:<span class="amount" name="amount">${product.AMOUNT}</span></li>
+                                <li class="list-group-item flex-balance">NT$<span class="productPrice" name="productPrice">${product.PRODUCT_PRICE}</span></li>
+                                <li class="list-group-item flex-balance -off"></li>
+                            </ul>
+                        `;
+
+                        $('#productList' + i).append(orderItemHtml);
+                    }
+                }
+
+                $('.delBtn').click(function() {
+                    const index = $(this).data('index');
+                    console.log(orderList[index]);
+                    
+                    // 待外送員接單
+                    delOrder = orderList[index];
+                });
+            }      
+        });
+    }
+
+    init();
+
+//    $(document).mouseover(function() {
+//        clearInterval(intervalId);
+//    });
+
+//    $(document).mouseleave(function() {
+//        // 每5秒撈取資料
+//        clearInterval(intervalId);
+//        intervalId = setInterval(init, 5000);
+//    });
+
+// ===============websocket yuyu======================
+// webSocket
+    let resId = sessionStorage.getItem("resId");
+    let resType = "0";
+
+    // 建立連線
+    let myPoint = `/ResToDel/${resId}/${resType}`;
+    // let host = window.location.host;
+    // let path = window.location.pathname;
+    // let webCtx = path.substring(0, path.indexOf("/", 1));
+    let endPointURL = "wss://" + window.location.host + "/monfood_maven" + myPoint;
+    console.log(endPointURL);
+
+    let webSocket = new WebSocket(endPointURL);
+
+    webSocket.onopen = function (event) {
+        console.log("商家連線上囉Connect Success!");
+    };
+
+
+    let delId ;
+    webSocket.onmessage = function (event) {
+        let jsonObj = JSON.parse(event.data);
+        console.log("jsonObj = ", jsonObj);
+        if ("delAccept" === jsonObj.type) {          
+            console.log("收到外送員已接單jsonObj = ",jsonObj);
+            delId = jsonObj.delId;
+            console.log("delId = ",delId)
+        }
+    }    
+
+
+    $('#taken').click(function () {
+        console.log("按下btn");
+        var jsonObj = {
+            type: "taken",
+            sender: resId,
+            receiver: delId + "1",
+            message: `可取餐了`,          
+        };
+        webSocket.send(JSON.stringify(jsonObj)); // 	jsonObj改成json格式
+        console.log(jsonObj);
+
+		// 更新商品訂單狀態
+		$.ajax({
+			url: 'UpdateOrderStatusServlet',
+			method: 'post',
+			data: {
+				orderId: delOrder.ORDER_ID,
+				orderStatus: 3
+			},
+			dataType: 'json',
+			success: function () {
+				window.location.href = resProtocol + '//' + resHost + resWebCtx + '/admin-res-reception/resReception-order-record.jsp';
+			}
+		});        
+        
+	});
+
+
+
+
+    webSocket.onclose = function (event) {
+        console.log("商家連線斷囉Disconnected!");
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});

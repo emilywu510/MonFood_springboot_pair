@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>buttonContent</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+
+    <!-- 整合完的buttonContent Css -->
+    <link rel="stylesheet" href="css/buttonContent.css" />
+  </head>
+  <body id="pairBody">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 右下按鈕 -->
+    <div id="container-floating">
+      <!-- 配對紐 -->
+      <button
+        id="pairFloatBtn"
+        class="nd3 nds"
+        data-toggle="tooltip"
+        data-placement="left"
+        data-bs-toggle="modal"
+        data-bs-target="#todayPairModal"
+      >
+        <img class="reminder" id="pair" src="images/handshake.png" />
+      </button>
+      <!-- 聊天紐 -->
+      <button
+        class="nd1 nds"
+        data-toggle="tooltip"
+        data-placement="left"
+        data-bs-toggle="modal"
+        data-bs-target="#chatListModal"
+      >
+        <img class="reminder" />
+        <p class="letter">
+          <img class="chat" src="images/chat.png" />
+        </p>
+      </button>
+      <div id="floating-button" data-toggle="tooltip" data-placement="left">
+        <p class="plus" style="margin-bottom: 14px"></p>
+        <img class="edit" src="images/connection.png" />
+      </div>
+    </div>
+
+    <!-- 今日配對頁面Modal -->
+    <div
+      class="modal fade"
+      id="todayPairModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div id="modalContentPair" class="modal-content">
+          <div id="modalHeaderPair" class="modal-header">
+            <h5>
+              <span class="logo">Mon</span><span class="logo2">Food</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <h4 id="pairTitle">今日配對</h4>
+          <!-- 三欄網格 -->
+          <div class="container-fluid">
+            <div class="row">
+              <div id="acceptPairDiv" class="col">
+                <!-- 接受配對按鈕 -->
+                <div id="acceptPair">
+                  <button
+                    type="button"
+                    class="btn"
+                    id="acceptPairBtn"
+                    value="1"
+                    data-bs-toggle="modal"
+                    data-bs-target="#waitPairModal"
+                  >
+                    接受配對
+                  </button>
+                </div>
+              </div>
+              <div class="col-6">
+                <!-- 自我介紹區塊 -->
+                <div id="intro">
+                  <div class="modal-body">
+                    <img id="headshot" src="" />
+                    <h5 class="name"></h5>
+                    <div id="selfIntro"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <!-- 拒絕配對按鈕 -->
+                <div id="refusePair">
+                  <button
+                    type="button"
+                    class="btn"
+                    id="refusePairBtn"
+                    value="0"
+                    data-bs-toggle="modal"
+                    data-bs-target="#waitNightPairModal"
+                  >
+                    拒絕配對
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 等待配對頁面Modal -->
+    <div
+      class="modal"
+      id="waitPairModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div id="modalContentPair" class="modal-content">
+          <div id="modalHeaderPair" class="modal-header">
+            <h5>
+              <span class="logo">Mon</span><span class="logo2">Food</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <h4 id="pairTitle">等待配對</h4>
+          <div id="waitPairInfo" class="col align-self-center">
+            <img id="waitPairImg" src="images/impatient.png" alt="" />
+            <p id="sendIv">已送出邀請，請耐心等待</p>
+            <p id="sendIv">如配對成功，您可在好友及訊息列表找到對方</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 配對成功頁面Modal -->
+    <!-- <div
+      class="modal"
+      id="successPairModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div id="modalContentPair" class="modal-content">
+          <div id="modalHeaderPair" class="modal-header">
+            <h5>
+              <span class="logo">Mon</span><span class="logo2">Food</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <h4 id="pairTitle">配對成功</h4>
+          <div id="successPairInfo" class="col align-self-center">
+            <img id="successPairImg" src="images/friends.png" alt="" />
+            <p id="beocmeFriends">您已與David成為好友</p>
+            <a href="http://127.0.0.1:5501/messenger.html#" id="startChat"
+              >點此開始聊天</a
+            >
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- (拒絕)等待午夜配對頁面Modal -->
+    <div
+      class="modal"
+      id="waitNightPairModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div id="modalContentPair" class="modal-content">
+          <div id="modalHeaderPair" class="modal-header">
+            <h5>
+              <span class="logo">Mon</span><span class="logo2">Food</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <h4 id="pairTitle">等待下次配對</h4>
+          <div id="waitNightPairInfo" class="col align-self-center">
+            <img id="waitNightPairImg" src="images/day-and-night.png" alt="" />
+            <p id="nightPair">您已拒絕與<span id="name1"></span>成為好友</p>
+            <p id="nightPair">等待午夜降臨</p>
+            <p id="nightPair">等待12點一到，即可進行下次配對</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 訊息列表chatListModal -->
+    <div
+      class="modal fade"
+      id="chatListModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div id="modalContentPair" class="modal-content">
+          <div id="modalHeaderPair" class="modal-header">
+            <h5>
+              <span class="logo">Mon</span><span class="logo2">Food</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <h5 id="messageHeader">訊息列表</h5>
+          <div class="card-body table-responsive p-0" style="height: 300px">
+            <div class="modal-body modal-message">
+              <div class="list-group list-groups">
+                <!-- 訊息欄start -->
+                <!-- <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  aria-current="true"
+                  data-bs-toggle="modal"
+                  data-bs-target="#chatRoomModal"
+                >
+                  <div class="d-flex w-100">
+                    <div class="avatarList"></div>
+                    <div id="chatList">
+                      <h5 class="mb-1">我是假的</h5>
+                      <p id="chatContent" class="mb-1">吃飽睡睡飽吃</p>
+                    </div>
+                    <div id="sendTime">
+                      <small>22:30</small>
+                      <br />
+                      <span id="messageNum" class="badge rounded-pill">14</span>
+                    </div>
+                  </div>
+                </a> -->
+              </div>
+              <!-- 訊息欄end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="as">
+      <!-- 聊天室燈箱chatRoomModal -->
+
+      <!-- <div
+        class="modal fade"
+        id="chatRoomModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div id="modalContentPair" class="modal-content">
+            <div id="modalHeaderPair" class="modal-header">
+              <h5>
+                <span class="logo">Mon</span><span class="logo2">Food</span>
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="top_menu">
+                <div class="buttons">
+                  <button
+                    id="back"
+                    data-bs-toggle="modal"
+                    data-bs-target="#chatListModal"
+                  >
+                    <
+                  </button>
+                </div>
+                <div class="title">我是假的</div>
+              </div>
+              <ul class="messages"></ul>
+
+              <div id="sendMsg" class="bottom_wrapper clearfix">
+                <div class="message_input_wrapper">
+                  <input class="message_input" placeholder="請輸入文字. . . " />
+                </div>
+                <div class="send_message">
+                  <div class="icon"></div>
+                  <div class="text">送出</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="message_template">
+              <li class="message">
+                <div class="avatar"></div>
+                <div class="text_wrapper">
+                  <div class="text"></div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <script src="assets/js/jQuery-3.6.0.js"></script>
+    <script src="js/buttonContent.js"></script>
+  </body>
+</html>

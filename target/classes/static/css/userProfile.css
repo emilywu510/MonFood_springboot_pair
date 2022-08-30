@@ -1,0 +1,25 @@
+#budgetsubmit, #kcalsubmit, #introductionsubmit{
+    background-color: #FF7F3F;
+    font-size: 10px;
+    margin-left: 5px;
+    border: none;
+    padding: 0;
+    width: 50px;
+}
+
+.col-6 {
+    padding: 8px;
+}
+.col-8 {
+    padding: 8px;
+}
+@media (max-width: 768px){
+    .x {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+    }
+    /* .col-8 {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+    } */
+}

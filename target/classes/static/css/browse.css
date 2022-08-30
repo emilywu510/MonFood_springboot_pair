@@ -1,0 +1,182 @@
+
+
+div.loc_and_input{
+    text-align: center;
+}
+@media (min-width: 992px){
+
+    .container{
+        max-width: 960px !important;
+    }
+}
+.monfood-notification{
+    text-align: center;
+    height: 150px;
+    display: flex;
+    background-color: #F6D14B;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+    color: black;
+    font-size: 22px;
+}
+
+input.search{
+    width: 350px;
+    height: 40px;
+    border: 1px solid gray;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color: gray;
+}
+
+.flip{
+    margin:0px;
+    border: 1px solid lightgray;
+    height: fit-content;
+    padding:5px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.resCategory-panel{
+    margin:0px;
+    padding:5px;
+    text-align:center;
+    border:solid 1px #c3c3c3;
+    display:none;
+}
+
+
+.restriction{
+    margin: 10px;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.restriction:focus{
+    background-color: #ff7f3f;
+    color: white;
+}
+
+.resAll{   
+    margin-left: 160px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+
+div.slide{
+    margin: 30px 100px 30px 100px;
+}
+
+.row {
+    margin: 20px 60px 20px 60px;
+}
+.change_add{
+    opacity: 0.8;
+}
+.change_add:hover{
+    opacity: 1.2;
+    transform: scale(1.1);
+}
+
+.current_add{
+    opacity: 0.8;
+}
+
+.current_add{
+    opacity: 1.2;
+    transform: scale(1.1);
+}
+
+
+button.show_more{
+    border: transparent;
+    border-radius: 20px;
+    width: 150px;
+    height: 50px;
+}
+
+.show_more{
+    margin-top: 20px;
+}
+
+.checkout_btn{
+    width: 100px;
+}
+
+.change_add_1, .change_add_2, .add_new_add{
+    border: none;
+    opacity: 0.8;
+}
+
+.change_add_1:hover, .change_add_2:hover, .add_new_add:hover{
+    opacity: 1.2;
+    transform: scale(1.1);
+}
+
+@media (max-width: 767.98px){
+    .container{
+        width: 100%;
+    }
+}
+
+a#changeAddress{
+    padding: 1px; 
+    background-color: lightgray;
+    border: none;
+    font-size: 8px;
+    border-radius: 0;
+}
+
+a#changeAddress:focus{
+    color: black;
+}
+
+li{
+    list-style: none;
+    margin-top: 10px;
+}
+
+select.form-select, select.form-select:focus{
+    outline: none;
+    width: 60px;
+    font-size: 0.1px;
+    box-shadow: none;
+    border-color: rgb(206, 212, 218);
+}
+@media (max-width: 767.98px){
+    select.form-select{
+        height: 30px;
+        font-size: 10px;
+    }
+}
+
+a > div > div{
+    font-size: 12px;
+}
+
+div.amount, div.pay{
+    margin: 0px 30px;
+}
+
+div.offcanvas-bottom.show{
+    margin: 0 300px;
+    height: 500px; 
+}
+
+@media (max-width: 767.98px){
+    div.offcanvas-bottom.show{
+        margin: 0 0;
+    }
+}
+
+#map{
+    width: 100%;
+    height: 200px;
+}
+
+
+
