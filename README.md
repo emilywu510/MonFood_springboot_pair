@@ -1,2 +1,2 @@
 # monfood_springboot
-將團體專題個人負責的隨機配對及聊天室部分轉為使用SPRINGBOOT+HIBERNATE技術實現(進行中)
+將團體專題個人負責的隨機配對及聊天室部分轉為使用SPRINGBOOT+HIBERNATE技術實現(部分)
